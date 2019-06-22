@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="cn.comesaday.cw.domain.Orchard" table="orchard">
+        <id name="id">
+            <generator class="identity"/>
+        </id>
+        <property name="name"/>
+
+        <property name="picture1"/>
+ 
+        <property name="picture2"/>
+  
+        <property name="picture3"/>
+
+        <property name="picture4"/>
+
+        <property name="picture5"/>
+
+        <property name="picture6"/>
+
+        <property name="movie"/>
+
+        <property name="web"/>
+
+        <property name="address"/>
+
+        <property name="opoint"/>
+
+        <property name="detail"/>
+
+    </class>
+</hibernate-mapping>

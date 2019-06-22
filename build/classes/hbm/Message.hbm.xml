@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="cn.comesaday.cw.domain.Message" table="message">
+        <id name="id">
+            <generator class="identity"/>
+        </id>
+        <many-to-one class="cn.comesaday.cw.domain.User" name="user" column="uid"/>
+ 				<many-to-one class="cn.comesaday.cw.domain.Tree" name="tree" column="tid"/>
+        <property name="movie"/>
+
+        <property name="picture1"/>
+
+        <property name="picture2"/>
+
+        <property name="picture3"/>
+
+        <property name="content"/>
+
+				<property name="stime"/>
+    </class>
+</hibernate-mapping>

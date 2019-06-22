@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="cn.comesaday.cw.domain.User" table="user">
+        <id name="id">
+            <generator class="identity"/>
+        </id>
+        <property name="account"/>
+
+        <property name="password"/>
+
+        <property name="name"/>
+
+        <property name="sex"/>
+
+        <property name="phone"/>
+
+        <property name="address"/>
+
+        <property name="email"/>
+
+        <property name="isvip"/>
+
+        <property name="state"/>
+        <set name="expresses">
+            <key>
+                <column name="uid"/>
+            </key>
+            <one-to-many class="cn.comesaday.cw.domain.Express"/>
+        </set>
+        <set name="messages">
+            <key>
+                <column name="uid"/>
+            </key>
+            <one-to-many class="cn.comesaday.cw.domain.Message"/>
+        </set>
+        <set name="comments">
+            <key>
+                <column name="uid" not-null="true"/>
+            </key>
+            <one-to-many class="cn.comesaday.cw.domain.Comment"/>
+        </set>
+        <set name="suscs">
+            <key>
+                <column name="uid"/>
+            </key>
+            <one-to-many class="cn.comesaday.cw.domain.Susc"/>
+        </set>
+    </class>
+</hibernate-mapping>

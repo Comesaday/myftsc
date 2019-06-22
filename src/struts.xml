@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+	"http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+
+	<constant name="struts.multipart.maxSize" value="100000000" />
+	<package strict-method-invocation="false" name="error" extends="struts-default" abstract="true">
+			<interceptors>  
+        <interceptor-stack name="storeStack">  
+            <interceptor-ref name="store">  
+                <param name="operationMode">AUTOMATIC</param>  
+            </interceptor-ref>  
+            <interceptor-ref name="paramsPrepareParamsStack" />  
+        </interceptor-stack>  
+    	</interceptors>         
+	    <default-interceptor-ref name="storeStack" />
+			<global-results>
+					<result name="orc_add_info">/admin/orc_add.jsp</result>
+					<result name="ftsc_op_fail">/error.jsp</result>
+			</global-results>
+	</package>
+	
+	<package strict-method-invocation="false" name="bkadmin" extends="error" namespace="/bkadmin">
+		<action name="bkadmin" class="adminAction" method="login">
+			<result name="admin_log_success">/admin/index.jsp</result>
+			<result name="admin_log_fail">/admin/login.jsp</result>
+		</action>
+	</package>
+	
+	<package strict-method-invocation="false" name="index" extends="error" namespace="/index">
+		<action name="index_*" class="indexAction" method="{1}">
+			<result name="index_intro_info">/introduce.jsp</result>
+			<result name="index_pic_info">/orchard.jsp</result>
+			<result name="index_about_info">/aboutus.jsp</result>
+			<result name="index_susc_know">/notice.jsp</result>
+		</action>
+	</package>
+	
+	<package strict-method-invocation="false" name="admin" extends="error" namespace="/admin">
+		<action name="admin_*" class="adminAction" method="{1}">
+			<result name="admin_mod_success">/admin/exit.jsp</result>
+			<result name="admin_log_off">/admin/login.jsp</result>
+		</action>
+	</package>
+	
+	<package strict-method-invocation="false" name="orc" extends="error" namespace="/orc">
+		<action name="orc_*" class="orchardAction" method="{1}">
+			<result name="orc_mgr_info">/admin/orc_mgr.jsp</result>
+			<result name="orc_mod_page">/admin/orc_mod.jsp</result>
+		</action>
+	</package>
+	
+	<package strict-method-invocation="false" name="cat" extends="error" namespace="/cat">
+			<action name="cat_*" class="catagoryAction" method="{1}">
+				<result name="cat_add_page">/admin/cat_add.jsp</result>
+				<result name="cat_op_success" type="redirectAction">cat_addpage</result>
+			</action>
+	</package>
+	
+	<package strict-method-invocation="false" name="tree" extends="error" namespace="/tree">
+		<interceptors>  
+        <interceptor-stack name="storeStack">  
+            <interceptor-ref name="store">  
+                <param name="operationMode">AUTOMATIC</param>  
+            </interceptor-ref>  
+            <interceptor-ref name="paramsPrepareParamsStack" />  
+        </interceptor-stack>  
+    	</interceptors>         
+	  <default-interceptor-ref name="storeStack" />
+		<action name="tree_*" class="treeAction" method="{1}">
+			<result name="tree_mgr_info">/admin/tree_mgr.jsp</result>
+			<result name="tree_op_over" type="redirectAction">
+				<param name="actionName">tree_mgr</param>
+				<param name="catagory.id">${cid}</param>
+				<param name="state">${state1}</param>
+				<param name="page">${page}</param>
+			</result>
+			<result name="tree_add_page">/admin/tree_add.jsp</result>
+			<result name="tree_mod_page">/admin/tree_mod.jsp</result>
+			<result name="tree_susc_info">/list.jsp</result>
+			<result name="tree_view_this">/tree.jsp</result>
+			<result name="tree_list_info" type="redirectAction">
+				<param name="actionName">tree_list</param>
+				<param name="catagory.id">${cid}</param>
+				<param name="state">can</param>
+			</result>
+		</action>
+	</package>
+	
+	<package strict-method-invocation="false" name="user" extends="error" namespace="/user">
+		<action name="user_*" class="userAction" method="{1}">
+			<result name="user_mgr_info">/admin/user_mgr.jsp</result>
+			<result name="user_login_page">/login.jsp</result>
+			<result name="user_mod_page">/admin/user_mod.jsp</result>
+			<result name="user_mod_success">/admin/user_mod.jsp</result>
+			<result name="user_login_success" type="redirect">/index/index_intro.action</result>
+			<result name="user_op_login" type="redirectAction">user_loginpage</result>
+			<result name="user_logout">/index.jsp</result>
+			<result name="user_reg_page">/regist.jsp</result>
+			<result name="user_my_center">/user/mycenter.jsp</result>
+			<result name="user_repwd_success">/user/reexit.jsp</result>
+			<result name="user_repwd_fail" type="redirectAction">user_center</result>
+			<result name="user_my_info">/user/myinfo.jsp</result>
+			<result name="user_my_suscs">/user/mysusc.jsp</result>
+			<result name="user_vip_page">/user/vip.jsp</result>
+			<result name="user_my_orders">/user/myorder.jsp</result>
+			<result name="user_my_exps">/user/myexp.jsp</result>
+			<result name="user_my_cmts">/user/mycmt.jsp</result>
+			<result name="user_my_msgs">/user/mymsg.jsp</result>
+			<result name="user_open_vip">/user/vip.jsp</result>
+			<result name="user_info_page">/user/reinfo.jsp</result>
+			<result name="user_update_success" type="redirectAction">user_myinfo?id=${id}</result>
+		</action>
+	</package>
+	
+	<package strict-method-invocation="false" name="susc" extends="error" namespace="/susc">
+		<action name="susc_*" class="suscAction" method="{1}">
+			<result name="susc_mgr_info">/admin/susc_mgr.jsp</result>
+			<result name="susc_op_success" type="redirectAction">
+				<param name="actionName">susc_mgr</param>
+				<param name="page">${page}</param>
+			</result>
+			<result name="susc_my_center" type="redirect">/user/user_center.action</result>
+			<result name="susc_my_susc" type="redirect">/user/user_mysusc.action?id=${uid}</result>
+		</action>
+	</package>
+	
+	<package strict-method-invocation="false" name="exp" extends="error" namespace="/exp">
+		<action name="exp_*" class="expressAction" method="{1}">
+			<result name="exp_mgr_info">/admin/exp_mgr.jsp</result>
+			<result name="exp_send_page">/admin/sendexp.jsp</result>
+			<result name="exp_op_success" type="redirectAction">exp_mgr?page=${page}</result>
+		</action>
+	</package>
+	
+	<package strict-method-invocation="false" name="cmt" extends="error" namespace="/cmt">
+		<action name="cmt_*" class="commentAction" method="{1}">
+			<result name="cmt_mgr_info">/admin/cmt_mgr.jsp</result>
+			<result name="cmt_cmt_page">/user/cmt_add.jsp</result>
+			<result name="cmt_my_cmt" type="redirect">/user/user_mycmt.action?id=${uid}</result>
+				<result name="cmt_search_info" type="redirectAction">cmt_mgr?page=${page}</result>
+		</action>
+	</package>
+	
+		<package strict-method-invocation="false" name="msg" extends="error" namespace="/msg">
+		<action name="msg_*" class="messageAction" method="{1}">
+			<result name="msg_op_info" type="redirectAction">msg/msg_mgr</result>
+			<result name="msg_view_info">/user/thismsg.jsp</result>
+			<result name="msg_send_page">/admin/sendmsg.jsp</result>
+			<result name="msg_mgr_info">/admin/msg_mgr.jsp</result>
+			<result name="msg_op_success" type="redirectAction">msg_mgr?page=${page}</result>
+		</action>
+	</package>
+</struts>
+
+

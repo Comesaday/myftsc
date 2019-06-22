@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="cn.comesaday.cw.domain.Tree" table="tree">
+        <id name="id">
+            <generator class="identity"/>
+        </id>
+        <many-to-one class="cn.comesaday.cw.domain.Catagory" name="catagory" column="gid"/>
+
+        <property name="picture1"/>
+
+        <property name="picture2"/>
+
+        <property name="picture3"/>
+
+        <property name="price"/>
+ 
+        <property name="tpoint"/>
+
+        <property name="detail"/>
+
+        <property name="state"/>
+
+        <set name="suscs">
+            <key>
+                <column name="tid"/>
+            </key>
+            <one-to-many class="cn.comesaday.cw.domain.Susc"/>
+        </set>
+        
+        <set name="expresses">
+            <key>
+                <column name="tid"/>
+            </key>
+            <one-to-many class="cn.comesaday.cw.domain.Express"/>
+        </set>
+        
+        <set name="comments">
+            <key>
+                <column name="tid"/>
+            </key>
+            <one-to-many class="cn.comesaday.cw.domain.Comment"/>
+        </set>
+        <set name="messages">
+            <key>
+                <column name="tid"/>
+            </key>
+            <one-to-many class="cn.comesaday.cw.domain.Message"/>
+        </set>
+    </class>
+</hibernate-mapping>
